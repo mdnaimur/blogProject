@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+  <link rel="stylesheet" href='{% static "css/base.css" %}'>
+
+  <title>{% block head_title %} Blog django {% endblock head_title %}</title>
+  {% block head_extra %}  {% endblock head_extra %}
+</head>
+
+<body>
+
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v10.0"
+    nonce="oiM1SLOU"></script>
+
+
+
+  {% include "messages_display.html" %}
+
+  <div class="container">
+    {% block content %}
+
+
+
+    {% endblock content %}
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+    integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+    crossorigin="anonymous"></script>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.0.2/marked.min.js" integrity="sha512-1CPEwUeWWvFhr9h3Wj8Xni1ERD06bgiSN+2uA/Cw3cFqSESS04nmqzutUXzHZwcnDi/XQX9iJ/HKqJ5njB3Sbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <script type="text/javascript" >
+      console.log('i am working!! ')
+
+   $(document).ready(function(){
+   $(".content-markdown").each(function(){
+        var content = $(this).text()
+        console.log(content)
+        var markedContent = marked(content)
+        console.log(markedContent)
+        $(this).html(markedContent)
+
+  })
+
+   $(".post-detail-item img").each(function(){
+        $(this).addClass("img-fluid");
+
+  })
+  
+    var titleItem = $("#id_title");
+    //$("#preview-title").text(titleItem.val())
+
+    function setTitle(value){
+      $("#preview-title").text(value)
+    }
+    setTitle(titleItem.val())
+    titleItem.keyup(function(){
+      var newContent = $(this).val()
+      setTitle(newContent)
+      
+    })
+  
+
+    var contentItem = $("#wmd-input-id_content")
+  
+   // $("#preview-content").html(marked(contentItem.val()))
+
+    function setContent(value){
+      var markedContent = marked(value)
+      $("#preview-content").html(markedContent)
+      $("#preview-content img").each(function(){
+        $(this).addClass("img-fluid")
+      })
+
+    }
+    setContent(contentItem.val())
+    contentItem.keyup(function(){
+      var newContent = $(this).val()
+        setContent(newContent)
+      
+    })
+    
+  })
+
+</script>
+  </body>
+
+</html>

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load urlfy %}
+{% block head_title %} {{instance.title}} |{{block.super}} {% endblock head_title %}
+
+{% block content %}
+
+<div class="col-sm-6 col-sm-offset-3">
+    {% if instance.image %}
+    <img src='{{instance.image.url}}' alt="" class="img-responsive" style="max-height:300px">
+    {% endif %}
+
+    <h1> {{title}} <small> {% if instance.draft %}<span style="color:red;" >Draft</span>{% endif %} {{ instance.publish }}</small> </h1>
+      <h5>Author: {{instance.user}}</h5>
+      
+ 
+<div class="row">
+    <div class="col-sm-12">
+        <div class="post-detail-item">
+            {{instance.get_markdown }}
+        </div>
+        <hr>
+        <br>
+        
+        <div>
+            <p class="lead">Comment</p>
+            {% for comment in comments %}
+           <h4> {{comment.content_object}}</h4>
+                <div>
+                    {{comment.conetent}}
+                    <br>
+                    via {{comment.user}} on {{comment.timestamp|timesince}} ago
+                    <hr>
+                </div>
+            {% endfor %}
+            
+           </div>
+    </div>
+</div>
+<!-- 
+<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div> -->
+
+    <a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}">
+        Share on Facebook
+    </a>
+   
+    <a
+        href="https://www.linkedin.com/shareArticle?mini=true&url=http://swiftforentrepreneurs.com/&title=Be%20first%20%7C%20Join%20Swift%20for%20Entrepreneurs&summary=Swift%20for%20Entrepreneurs%20is%20a%20project-based%20programming%20course%20for%20non-technical%20founders.%20We'll%20learn%20how%20to%20build%20iOS%20apps%20from%20scratch%20using%20Apple's%20new%20programming%20language:%20Swift.%20Be%20first%20and%20learn%20with%20me!&source={{request.build_absolute_uri}}">
+        Share on Linkedin
+    </a>
+    <div class="fb-comments" data-href="{{request.build_absolute_uri}}" data-width="" data-numposts="5"></div>
+</div>
+
+{% endblock content %}

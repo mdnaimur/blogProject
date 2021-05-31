@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+</head>
+<body>
+    <h1>{{title}} working.....</h1>
+    {{object_list}}
+    {% for obj in object_list %}
+    
+    <a href='{{obj.get_absolute_url}}'> <h3> {{obj.title }} </h3>  </a>
+     <h4> {{obj.content }} </h4>
+
+     <h5>{{obj.timestamp}}</h5>
+     <h6>{{obj.updated }}</h6> 
+     <p>{{obj.id }}</p>
+    {% endfor %}
+
+</body>
+</html>
