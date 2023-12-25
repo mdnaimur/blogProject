@@ -16,15 +16,17 @@ Including another URLconf
 #from posts.views import post_home
 from django import urls
 from django.conf import settings
+from django.conf.urls import include
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import url,include
+from django.urls import re_path
+
 #from posts import views
 
 
 urlpatterns = [
-    url(r'^posts/',include('posts.urls',namespace='posts')),
+    re_path(r'^posts/',include('posts.urls',namespace='posts')),
     path('admin/', admin.site.urls),
 ]
 if settings.DEBUG:
